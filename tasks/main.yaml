@@ -1,0 +1,28 @@
+---
+- name: Change default nginx.conf
+  hosts: all
+  block:
+    - name: Copy template nginx.conf to server
+      template:
+        src: nginx_conf.j2
+        dest: "/etc/nginx/nginx.conf"
+
+    - name: Restart nginx
+      become: yes
+      service:
+        name: nginx
+        state: reload
+
+- name: Change default index.html
+  hosts: all
+  block:
+    - name: Copy template nginx.conf to server
+      template:
+        src: index_html.j2
+        dest: "/usr/share/nginx/html/index.html"
+
+    - name: Restart nginx
+      become: yes
+      service:
+        name: nginx
+        state: reload   
