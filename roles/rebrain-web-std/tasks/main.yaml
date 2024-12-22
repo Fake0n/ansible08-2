@@ -1,6 +1,6 @@
 ---
 - name: Change default nginx.conf
-  hosts: all
+  become: yes
   block:
     - name: Copy template nginx.conf to server
       template:
@@ -11,10 +11,10 @@
       become: yes
       service:
         name: nginx
-        state: reload
+        state: reloaded
 
 - name: Change default index.html
-  hosts: all
+  become: yes
   block:
     - name: Copy template nginx.conf to server
       template:
@@ -25,4 +25,4 @@
       become: yes
       service:
         name: nginx
-        state: reload   
+        state: reloaded
